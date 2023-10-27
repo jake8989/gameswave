@@ -15,6 +15,7 @@ interface ScreenShots {
 }
 
 interface gameType {
+	id: number;
 	name: string;
 	released: string;
 	rating: number;
@@ -39,11 +40,12 @@ const useGetGames = () => {
 				},
 			})
 			.then((response: AxiosResponse) => {
-				console.log(response.data.results);
+				console.log(response.data);
 				setLoading(false);
 				const result: gameType[] = response.data.results.map(
 					(resultt: gameType) => {
 						const {
+							id,
 							name,
 							background_image,
 							rating,
@@ -52,6 +54,7 @@ const useGetGames = () => {
 							short_screenshots,
 						} = resultt;
 						return {
+							id,
 							name,
 							background_image,
 							rating,

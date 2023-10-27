@@ -13,6 +13,7 @@ import {
 	Rating,
 } from '@mui/material';
 import { CircularProgress } from '@mui/material';
+import GameModal from './GameModal';
 interface Platform {
 	id: number;
 	name: string;
@@ -28,6 +29,7 @@ interface ScreenShots {
 }
 
 interface gameType {
+	id: number;
 	name: string;
 	released: string;
 	rating: number;
@@ -42,6 +44,14 @@ interface props {
 
 const Games: React.FC<props> = ({ games, loading }) => {
 	console.log(games);
+	const [open, setOpen] = React.useState(false);
+	const [currentGame, setCurrentGame] = React.useState<gameType>();
+
+	const handleOpen = (game: gameType) => {
+		setOpen(true);
+		setCurrentGame(game);
+	};
+	const handleClose = () => setOpen(false);
 	if (games.length === 0) {
 		return '';
 	}
@@ -92,13 +102,20 @@ const Games: React.FC<props> = ({ games, loading }) => {
 									</Typography>
 								</CardContent>
 								<CardActions>
-									<Button variant="contained">Game Details</Button>
+									<Button variant="contained" onClick={() => handleOpen(game)}>
+										Game Details
+									</Button>
 								</CardActions>
 							</Card>
 						))}
 					</Box>
 				</Box>
 			)}
+			<GameModal
+				open={open}
+				handleClose={handleClose}
+				game={currentGame}
+			></GameModal>
 		</Box>
 	);
 };

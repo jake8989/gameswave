@@ -3,6 +3,7 @@ import useGetGames from '@/hooks/useGetGames';
 interface Type {
 	id: string;
 }
+import GameModal from './GameModal';
 import { CircularProgress } from '@mui/material';
 import {
 	Typography,
@@ -16,8 +17,39 @@ import {
 	CardActions,
 	Rating,
 } from '@mui/material';
+interface Platform {
+	id: number;
+	name: string;
+	slug: string;
+}
+
+interface Platforms {
+	platform: Platform;
+}
+interface ScreenShots {
+	id: number;
+	image: string;
+}
+
+interface gameType {
+	id: number;
+	name: string;
+	released: string;
+	rating: number;
+	background_image: string;
+	platforms: Array<Platforms>;
+	short_screenshots: Array<ScreenShots>;
+}
 const PopularGames: React.FC<Type> = ({}) => {
 	const { getGames, games, loading } = useGetGames();
+	const [open, setOpen] = React.useState(false);
+
+	const [currentGame, setCurrentGame] = React.useState<gameType>();
+	const handleOpen = (game: gameType) => {
+		setOpen(true);
+		setCurrentGame(game);
+	};
+	const handleClose = () => setOpen(false);
 	useEffect(() => {
 		const hd = async () => {
 			await getGames('Popular Games');
@@ -72,13 +104,20 @@ const PopularGames: React.FC<Type> = ({}) => {
 									</Typography>
 								</CardContent>
 								<CardActions>
-									<Button variant="contained">Game Details</Button>
+									<Button onClick={() => handleOpen(game)} variant="contained">
+										Game Details
+									</Button>
 								</CardActions>
 							</Card>
 						))}
 					</Box>
 				</Box>
 			)}
+			<GameModal
+				open={open}
+				handleClose={handleClose}
+				game={currentGame}
+			></GameModal>
 		</Box>
 	);
 };
