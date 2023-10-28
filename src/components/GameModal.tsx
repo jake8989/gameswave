@@ -97,11 +97,14 @@ const GameModal: React.FC<ModalProps> = ({ open, handleClose, game }) => {
 									>
 										{game?.name}
 									</Typography>
-									<Typography textAlign={'center'}>
-										<a href={gameDetail?.website} target="_blank">
-											<Button>{gameDetail?.website}</Button>
-										</a>
-									</Typography>
+									{gameDetail?.website && (
+										<Typography textAlign={'center'}>
+											<a href={gameDetail?.website} target="_blank">
+												<Button>{gameDetail?.website}</Button>
+											</a>
+										</Typography>
+									)}
+
 									<Box
 										marginTop={'30px'}
 										display={'flex'}
