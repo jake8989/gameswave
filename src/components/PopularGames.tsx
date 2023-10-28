@@ -52,7 +52,7 @@ const PopularGames: React.FC<Type> = ({}) => {
 	const handleClose = () => setOpen(false);
 	useEffect(() => {
 		const hd = async () => {
-			await getGames('Popular Games');
+			await getGames('');
 		};
 		hd();
 	}, []);

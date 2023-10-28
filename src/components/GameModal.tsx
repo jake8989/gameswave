@@ -6,9 +6,11 @@ import {
 	Card,
 	Button,
 	CircularProgress,
+	Avatar,
+	Tooltip,
 } from '@mui/material';
 import { useEffect } from 'react';
-
+import PlatFormCP from './PlatForm';
 const style = {
 	position: 'absolute' as 'absolute',
 	top: '50%',
@@ -100,6 +102,27 @@ const GameModal: React.FC<ModalProps> = ({ open, handleClose, game }) => {
 											<Button>{gameDetail?.website}</Button>
 										</a>
 									</Typography>
+									<Box
+										marginTop={'30px'}
+										display={'flex'}
+										flexDirection={'column'}
+										justifyContent={'center'}
+										alignItems={'center'}
+									>
+										<Typography
+											textAlign={'center'}
+											fontSize={'20px'}
+											sx={{ opacity: '0.8' }}
+										>
+											PlatForms
+										</Typography>
+										<Box display={'flex'}>
+											{game.platforms.map((platform) => (
+												<PlatFormCP name={platform.platform.name}></PlatFormCP>
+											))}
+										</Box>
+									</Box>
+
 									<Typography padding={'50px'} sx={{ opacity: 0.7 }}>
 										{!loading && gameDetail?.description_raw}
 									</Typography>
