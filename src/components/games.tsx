@@ -43,7 +43,7 @@ interface props {
 }
 
 const Games: React.FC<props> = ({ games, loading }) => {
-	console.log(games);
+	// console.log(games);
 	const [open, setOpen] = React.useState(false);
 	const [currentGame, setCurrentGame] = React.useState<gameType>();
 

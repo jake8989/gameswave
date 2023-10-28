@@ -26,9 +26,7 @@ interface gameType {
 const useGetGames = () => {
 	const [games, setGames] = useState<gameType[]>([]);
 	const [loading, setLoading] = useState<boolean>(false);
-	useEffect(() => {
-		console.log('games', games);
-	}, []);
+
 	const getGames = async (search_query: string) => {
 		setLoading(true);
 		axios
@@ -40,7 +38,7 @@ const useGetGames = () => {
 				},
 			})
 			.then((response: AxiosResponse) => {
-				console.log(response.data);
+				// console.log(response.data);
 				setLoading(false);
 				const result: gameType[] = response.data.results.map(
 					(resultt: gameType) => {
@@ -64,7 +62,7 @@ const useGetGames = () => {
 						};
 					}
 				);
-				console.log(result);
+				// console.log(result);
 				setGames(result);
 				// console.log('after updation', games);
 			})

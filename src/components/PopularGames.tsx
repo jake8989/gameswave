@@ -56,7 +56,7 @@ const PopularGames: React.FC<Type> = ({}) => {
 		};
 		hd();
 	}, []);
-	console.log(games);
+	// console.log(games);
 
 	return (
 		<Box marginTop={'50px'}>
