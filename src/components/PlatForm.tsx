@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Tooltip } from '@mui/material';
+import { Avatar, Tooltip, Box } from '@mui/material';
 const PlatFormCP: React.FC<{ name: string }> = ({ name }) => {
 	let img_url = '';
 	switch (name) {
@@ -84,7 +84,11 @@ const PlatFormCP: React.FC<{ name: string }> = ({ name }) => {
 	}
 	return (
 		<Tooltip title={name}>
-			<Avatar sx={{ margin: '7px' }} src={img_url}></Avatar>
+			{img_url !== '' ? (
+				<Avatar sx={{ margin: '7px' }} src={img_url}></Avatar>
+			) : (
+				<Box></Box>
+			)}
 		</Tooltip>
 	);
 };
